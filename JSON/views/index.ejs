@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Taco Recipes</title>
+  <link rel="stylesheet" type="text/css" href="/styles/main.css">
+</head>
+
+<body>
+  <h1>Taco Town 🌮</h1>
+  <!-- Buttons to choose the taco protein -->
+  <form action="/recipe" method="POST" class="buttons">
+    <button type="submit" value="chicken" name="choice">🍗</button>
+    <button type="submit" value="beef" name="choice">🥩</button>
+    <button type="submit" value="fish" name="choice">🐟</button>
+  </form>
+
+  <div id="recipeContainer" class="hidden">
+    <% if (!recipe) { %>
+      <!-- Message if no recipe selected -->
+      <h2>Pick your favourite taco ingredient 👆</h2>
+    <% } else { %>
+      <!-- Show the selected recipe -->
+      <h2><%= recipe.name  %></h2>
+      <h3>Ingredients:</h3>
+      <ul id="ingredientsList">
+        <!-- Protein -->
+        <li><%= recipe.ingredients.protein.name %>, <%= recipe.ingredients.protein.preparation %></li>
+        <!-- Salsa -->
+        <li><%= recipe.ingredients.salsa.name %></li>
+        <!-- Toppings -->
+        <% recipe.ingredients.toppings.forEach(topping => { %>
+        <li> <%= topping.quantity %> of <%= topping.name %></li>
+        <% }); %>
+      </ul>
+    <% } %>
+  </div>
+</body>
+
+</html>
